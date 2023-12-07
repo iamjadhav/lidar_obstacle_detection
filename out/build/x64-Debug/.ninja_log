@@ -1,6 +1,0 @@
-# ninja log v5
-6	7443	7209916485884799	CMakeFiles/environment.dir/src/render/render.cpp.obj	3ef93ba705d9af15
-6	14943	7222277202205364	CMakeFiles/environment.dir/src/processPointClouds.cpp.obj	dcb2bbc27b5c01e6
-1	16793	7222277220726699	CMakeFiles/environment.dir/src/environment.cpp.obj	c3ad66688e67b9e
-16793	20007	7222277252187576	environment.exe	b023a5faada18269
-0	45	0	clean	9992afb1f91dc381

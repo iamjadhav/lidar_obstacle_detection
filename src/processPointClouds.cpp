@@ -28,7 +28,7 @@ typename pcl::PointCloud<PointT>::Ptr ProcessPointClouds<PointT>::FilterCloud(ty
     auto startTime = std::chrono::steady_clock::now();
 
     // TODO:: Fill in the function to do voxel grid point reduction and region based filtering
-    pcl::PointCloud<PointT>::Ptr filtered_cloud(new pcl::PointCloud<PointT>());
+    typename pcl::PointCloud<PointT>::Ptr filtered_cloud(new pcl::PointCloud<PointT>());
     /*std::cerr << "\nPoint cloud before filtering: " << cloud->width * cloud->height << " data points ("
               << pcl::getFieldsList(*cloud) << ")." << std::endl;*/
 
@@ -38,7 +38,7 @@ typename pcl::PointCloud<PointT>::Ptr ProcessPointClouds<PointT>::FilterCloud(ty
     vox.setLeafSize(filterRes, filterRes, filterRes);
     vox.filter(*filtered_cloud);
 
-    pcl::PointCloud<PointT>::Ptr filtered_cloud_roi(new pcl::PointCloud<PointT>());
+    typename pcl::PointCloud<PointT>::Ptr filtered_cloud_roi(new pcl::PointCloud<PointT>());
 
     // ROI with cropbox
     pcl::CropBox<PointT> crop(true);
@@ -206,7 +206,7 @@ std::vector<typename pcl::PointCloud<PointT>::Ptr> ProcessPointClouds<PointT>::C
 
     // Assign the cluster_indices to separate cloud clusters to fill them with the resp points
     for (pcl::PointIndices cluster: cluster_indices) {
-        pcl::PointCloud<PointT>::Ptr curr_cluster(new pcl::PointCloud<PointT>);
+        typename pcl::PointCloud<PointT>::Ptr curr_cluster(new pcl::PointCloud<PointT>);
         for (int index: cluster.indices) {
             curr_cluster->points.push_back(cloud->points[index]);
         }
