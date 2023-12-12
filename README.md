@@ -37,8 +37,7 @@ Demo Tracking a Bicyclist:
 
 ## Known Issues/Bugs 
 
-- Some Obstacle bounding boxes merge into each other forming a huge box when two cars drive by for an instant
-- The pole is not detected in a few frames
+- RANSAC plane segmentation needs some tuning for Dataset-2 to avoid flat objects on the ground
 
 ## Dependencies
 
