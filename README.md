@@ -22,9 +22,14 @@ In this project I have implemented a Lidar Obstacle Detection module, which dete
 
 ## Demos and Overviews
 
-Demo:
+Demo Obstacle Detection:
 
 ![lidarObstacleDetection](https://github.com/iamjadhav/lidar_obstacle_detection/assets/35925489/f423bf00-6e1d-4652-9dbe-25a438559f8d)
+
+Demo Tracking a Bicyclist:
+
+![bicyclist_tracking](https://github.com/iamjadhav/lidar_obstacle_detection/assets/35925489/7f2cff45-2493-4740-abc1-23d7c1466ba3)
+
 
 ## Set of Assumptions 
 
@@ -108,5 +113,7 @@ Run environment.cpp
 Final Output and Overview --> 
 
 https://github.com/iamjadhav/lidar_obstacle_detection/assets/35925489/98bf36d1-0bb2-4a75-8ed7-48aab2db778f
+
+![lidarObstacleDetection_bicyclist_tracking](https://github.com/iamjadhav/lidar_obstacle_detection/assets/35925489/2c439fa0-9301-4a2b-95e4-0744e6051ec7)
 
 PCL Documentation --> [Link](https://pcl.readthedocs.io/projects/tutorials/en/latest/index.html)
