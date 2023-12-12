@@ -1,3 +1,0 @@
-D:/UMD/Courses/Udacity/Sensor_Fusion/SFND_Lidar_Obstacle_Detection/src/quiz/ransac/build/CMakeFiles/quizRansac.dir
-D:/UMD/Courses/Udacity/Sensor_Fusion/SFND_Lidar_Obstacle_Detection/src/quiz/ransac/build/CMakeFiles/ALL_BUILD.dir
-D:/UMD/Courses/Udacity/Sensor_Fusion/SFND_Lidar_Obstacle_Detection/src/quiz/ransac/build/CMakeFiles/ZERO_CHECK.dir

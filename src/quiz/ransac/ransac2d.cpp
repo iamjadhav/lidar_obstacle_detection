@@ -253,7 +253,7 @@ int main ()
     // Time manual RANSAC implementation
     auto startTime = std::chrono::steady_clock::now();
 
-    std::unordered_set<int> inliers = RansacPlane(cloud, 25, 0.25);
+    std::unordered_set<int> inliers = RansacPlane(cloud, 25, 0.15);
 
     auto endTime = std::chrono::steady_clock::now();
     auto elapsedTime = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime);
@@ -270,7 +270,6 @@ int main ()
 		else
 			cloudOutliers->points.push_back(point);
 	}
-
 
 	// Render 2D point cloud with inliers and outliers
 	if(inliers.size())

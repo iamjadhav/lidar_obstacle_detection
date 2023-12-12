@@ -7,6 +7,9 @@
 #include "processPointClouds.h"
 // using templates for processPointClouds so also include .cpp to help linker
 #include "processPointClouds.cpp"
+//#include "quiz/ransac/ransac2d.cpp"  // circular-dependency-issues
+#include <cmath>
+#include <unordered_set>
 #include <Eigen/Dense>
 
 std::vector<Car> initHighway(bool renderScene, pcl::visualization::PCLVisualizer::Ptr& viewer)
@@ -99,6 +102,7 @@ void simpleHighway(pcl::visualization::PCLVisualizer::Ptr& viewer)
 
 
 void cityBlock(pcl::visualization::PCLVisualizer::Ptr& viewer, ProcessPointClouds<pcl::PointXYZI>* city_processor, const pcl::PointCloud<pcl::PointXYZI>::Ptr& city_cloud)
+//void cityBlock(pcl::visualization::PCLVisualizer::Ptr& viewer)
 {
     // ----------------------------------------------------
     // -----Open 3D viewer and display real pcds -----
@@ -106,14 +110,15 @@ void cityBlock(pcl::visualization::PCLVisualizer::Ptr& viewer, ProcessPointCloud
     // RENDER OPTIONS
     bool render_full_cloud = false;
     bool render_filtered_cloud = false;
-    bool render_obst_cloud = false;
+    bool render_obst_cloud = true;
     bool render_plane_cloud = true;
     bool render_clusters = true;
     bool render_boxes = true;
 
-    /*ProcessPointClouds<pcl::PointXYZI>* city_processor = new (ProcessPointClouds<pcl::PointXYZI>);
+    //ProcessPointClouds<pcl::PointXYZI>* city_processor = new (ProcessPointClouds<pcl::PointXYZI>);
 
-    pcl::PointCloud<pcl::PointXYZI>::Ptr city_cloud = city_processor->loadPcd("../../src/sensors/data/pcd/data_1/0000000000.pcd");*/
+    // Path set relative to environment.exe in out/build/x64-Debug
+    //pcl::PointCloud<pcl::PointXYZI>::Ptr city_cloud = city_processor->loadPcd("../../../src/sensors/data/pcd/data_1/0000000001.pcd");
 
     if (render_full_cloud) {
         renderPointCloud(viewer, city_cloud, "ip_cloud_cityblock");
@@ -131,19 +136,36 @@ void cityBlock(pcl::visualization::PCLVisualizer::Ptr& viewer, ProcessPointCloud
     }
 
     // Segmenting the filtered cloud
-    std::pair<pcl::PointCloud<pcl::PointXYZI>::Ptr, pcl::PointCloud<pcl::PointXYZI>::Ptr> seg_cloud = city_processor->SegmentPlane(filtered_cloud, 25, 0.3);
+    //std::pair<pcl::PointCloud<pcl::PointXYZI>::Ptr, pcl::PointCloud<pcl::PointXYZI>::Ptr> seg_cloud = city_processor->SegmentPlane(filtered_cloud, 25, 0.3);
 
-    /*if (render_obst_cloud) {
-        renderPointCloud(viewer, seg_cloud.first, "obstacle_cloud_city", Color(1, 0, 0));
-    }*/
+    std::unordered_set<int> inliers = city_processor->RansacPlane(filtered_cloud, 25, 0.18);
+
+    pcl::PointIndices::Ptr inliers_pts(new pcl::PointIndices());
+
+    for (int index : inliers) {
+        inliers_pts->indices.push_back(index);
+    }
+
+    std::pair<typename pcl::PointCloud<pcl::PointXYZI>::Ptr, typename pcl::PointCloud<pcl::PointXYZI>::Ptr> segmented_cloud = city_processor->SeparateClouds(inliers_pts, filtered_cloud);
+
+    if (render_obst_cloud) {
+        renderPointCloud(viewer, segmented_cloud.first, "obstacle_cloud_city", Color(1, 0, 0));
+    }
 
     if (render_plane_cloud) {
-        renderPointCloud(viewer, seg_cloud.second, "plane_cloud_city", Color(0, 1, 0));
+        renderPointCloud(viewer, segmented_cloud.second, "plane_cloud_city", Color(0, 1, 0));
     }
 
     // Clustering the segmented and road clouds
     // 
-    std::vector<pcl::PointCloud<pcl::PointXYZI>::Ptr> city_clusters = city_processor->Clustering(seg_cloud.first, 0.6, 8, 600);
+    //std::vector<pcl::PointCloud<pcl::PointXYZI>::Ptr> city_clusters = city_processor->Clustering(seg_cloud.first, 0.6, 30, 600);
+
+    KdTree* tree = new KdTree;
+
+    for (int i = 0; i < segmented_cloud.first->size(); i++)
+        tree->insert(segmented_cloud.first->points[i], i);
+
+    std::vector<pcl::PointCloud<pcl::PointXYZI>::Ptr> city_clusters = city_processor->euclideanCluster(segmented_cloud.first, tree, 0.45);
 
     int clusterId = 0;
     std::vector<Color> colors = { Color(1,0,0), Color(1,1,0), Color(0,0,1) };
@@ -200,7 +222,7 @@ int main (int argc, char** argv)
     //cityBlock(viewer);
     ProcessPointClouds<pcl::PointXYZI>* city_pt_processor = new (ProcessPointClouds<pcl::PointXYZI>);
     // List of pcd files to operate on
-    std::vector<boost::filesystem::path> stream = city_pt_processor->streamPcd("../../src/sensors/data/pcd/data_2");
+    std::vector<boost::filesystem::path> stream = city_pt_processor->streamPcd("../../../src/sensors/data/pcd/data_1");
     // File iterator
     auto streamIterator = stream.begin();
     pcl::PointCloud<pcl::PointXYZI>::Ptr city_cloud_I;
