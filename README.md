@@ -1,16 +1,14 @@
 ## Lidar Obstacle Detection
-Obstacle Detection for Lidar Point Clouds using RANSAC, Kd-Tree, and Euclidean Clustering algorithms
+
 ---
 
 ## Overview
 
-Sensor fusion, is the process of taking data from multiple sensors and combining it to give us a better understanding of the world around us. we will mostly be focusing on two sensors, lidar, and radar. By the end we will be fusing the data from these two sensors to track multiple cars on the road, estimating their positions and speed.
+Sensor fusion is the process of taking data from multiple sensors and combining it to give us a better understanding of the world around us. we will mostly be focusing on two sensors, lidar, and radar. By the end we will be fusing the data from these two sensors to track multiple cars on the road, estimating their positions and speed.
 
 In this project I have implemented a Lidar Obstacle Detection module, which detects and tracks obstacles on the road using Lidar point clouds, 3D RANSAC Planar Segmentation, 3D Kd-Tree and Euclidean Clustering algorithms also using several Point Cloud Library methods such as Filtering, Extracting Indices, Crop Box, etc.
 
 **Lidar** sensing gives us high resolution data by sending out thousands of laser signals. These lasers bounce off objects, returning to the sensor where we can then determine how far away objects are by timing how long it takes for the signal to return. Also we can tell a little bit about the object that was hit by measuring the intesity of the returned signal. Each laser ray is in the infrared spectrum, and is sent out at many different angles, usually in a 360 degree range. While lidar sensors gives us very high accurate models for the world around us in 3D, they are currently very expensive, upwards of $60,000 for a standard unit.
-
-This project implements a Obstacle Detection module ...
 
 ## Technology Used
 
@@ -26,13 +24,7 @@ This project implements a Obstacle Detection module ...
 
 Demo:
 
-- 1)
-
-
-
-- 2)
-
-
+![lidarObstacleDetection](https://github.com/iamjadhav/lidar_obstacle_detection/assets/35925489/f423bf00-6e1d-4652-9dbe-25a438559f8d)
 
 ## Set of Assumptions 
 
@@ -113,6 +105,8 @@ Run environment.cpp
 
 ## Links
 
-Final Output and Overview --> [Link](https://youtu.be/G9Qp9nsc6AY)
+Final Output and Overview --> 
+
+https://github.com/iamjadhav/lidar_obstacle_detection/assets/35925489/98bf36d1-0bb2-4a75-8ed7-48aab2db778f
 
 PCL Documentation --> [Link](https://pcl.readthedocs.io/projects/tutorials/en/latest/index.html)
