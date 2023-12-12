@@ -10,8 +10,6 @@ In this project I have implemented a Lidar Obstacle Detection module, which dete
 
 **Lidar** sensing gives us high resolution data by sending out thousands of laser signals. These lasers bounce off objects, returning to the sensor where we can then determine how far away objects are by timing how long it takes for the signal to return. Also we can tell a little bit about the object that was hit by measuring the intesity of the returned signal. Each laser ray is in the infrared spectrum, and is sent out at many different angles, usually in a 360 degree range. While lidar sensors gives us very high accurate models for the world around us in 3D, they are currently very expensive, upwards of $60,000 for a standard unit.
 
-This project implements a Obstacle Detection module ...
-
 ## Technology Used
 
 * Ubuntu 16.04 LTS / Windows 11
@@ -26,13 +24,7 @@ This project implements a Obstacle Detection module ...
 
 Demo:
 
-- 1)
-
-https://github.com/iamjadhav/lidar_obstacle_detection/assets/35925489/f90ed14a-2533-45b6-b64d-36a86cc09708
-
-- 2)
-
-https://github.com/iamjadhav/lidar_obstacle_detection/assets/35925489/39903767-366c-4271-b3a7-163a089f2cc1
+![lidarObstacleDetection](https://github.com/iamjadhav/lidar_obstacle_detection/assets/35925489/f423bf00-6e1d-4652-9dbe-25a438559f8d)
 
 ## Set of Assumptions 
 
